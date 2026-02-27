@@ -1,0 +1,44 @@
+# =====================
+# Python
+# =====================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+.env
+venv/
+.env/
+
+# =====================
+# Node
+# =====================
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+
+# Lock files (keep only one if needed)
+pnpm-lock.yaml
+bun.lockb
+
+# =====================
+# Audio / Generated Files
+# =====================
+*.wav
+*.mpeg
+*.mp3
+
+# =====================
+# OS files
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Logs
+# =====================
+*.log

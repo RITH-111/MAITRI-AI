@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Personal Offline Diary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 140px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .entry {
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .entry-date {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .delete-btn {
+      background: #dc3545;
+      float: right;
+      font-size: 12px;
+      padding: 4px 8px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>📝 My Personal Diary (Offline)</h2>
+
+  <textarea id="diaryInput" placeholder="Write your thoughts here..."></textarea>
+  <br>
+  <button onclick="saveDiaryEntry()">Save Entry</button>
+
+  <h3>📖 Your Entries</h3>
+  <div id="entriesContainer"></div>
+
+  <script>
+
+    // Load entries on start
+    window.onload = loadEntries;
+
+    // Save diary entry
+    function saveDiaryEntry() {
+      let text = document.getElementById("diaryInput").value.trim();
+      if (!text) return;
+
+      let entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+      entries.unshift({
+        date: new Date().toLocaleString(),
+        content: text
+      });
+
+      localStorage.setItem("diaryEntries", JSON.stringify(entries));
+
+      document.getElementById("diaryInput").value = "";
+      loadEntries();
+    }
+
+    // Load and show entries
+    function loadEntries() {
+      let container = document.getElementById("entriesContainer");
+      container.innerHTML = "";
+
+      let entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+
+      entries.forEach((entry, index) => {
+        let card = document.createElement("div");
+        card.className = "entry";
+
+        let html = `
+          <button class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
+          <div class="entry-date">${entry.date}</div>
+          <div>${entry.content.replace(/\n/g, "<br>")}</div>
+        `;
+
+        card.innerHTML = html;
+        container.appendChild(card);
+      });
+    }
+
+    // Delete entry
+    function deleteEntry(index) {
+      let entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+      entries.splice(index, 1);
+      localStorage.setItem("diaryEntries", JSON.stringify(entries));
+      loadEntries();
+    }
+
+  </script>
+
+</body>
+</html>

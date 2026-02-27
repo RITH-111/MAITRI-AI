@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-particles"></div>
+
+    <div class="container">
+        <h1>Calm</h1>
+        <p class="subtitle">Find your center through breath</p>
+
+        <div class="breathing-circle" onclick="toggleBreathing()">
+            <div class="circle" id="breathingCircle">
+                <div style="color:white; font-size: 1.2rem; font-weight: 300; z-index: 2;">Breathe</div>
+            </div>
+        </div>
+
+        <div class="instruction" id="instruction">Click the circle to begin</div>
+
+        <div class="controls">
+            <button class="btn" id="playBtn" onclick="toggleBreathing()">Start</button>
+            <button class="btn" onclick="resetSession()">Reset</button>
+        </div>
+
+        <div class="sound-controls">
+            <button class="sound-btn" onclick="toggleSound('rain')">Rain</button>
+            <button class="sound-btn" onclick="toggleSound('ocean')">Ocean</button>
+            <button class="sound-btn" onclick="toggleSound('forest')">Forest</button>
+            <button class="sound-btn" onclick="toggleSound('silence')">Silence</button>
+        </div>
+
+        <div class="timer-display" id="timer">00:30</div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
